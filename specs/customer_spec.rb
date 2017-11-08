@@ -15,6 +15,7 @@ class TestCustomer < MiniTest::Test
     @pub = Pub.new("The King's Head", 0.0, [@drink1, @drink2, @drink3])
 
     @customer = Customer.new("Alan", 20.00)
+    @customer2 = Customer.new("Bob", 3.00)
 
   end
 
@@ -27,7 +28,19 @@ class TestCustomer < MiniTest::Test
   end
 
   def test_customer_can_afford_drink
-    assert_equal(true, @customer.buy_drink(@drink1))
+    assert_equal(4.50, @customer.buy_drink(@pub, @drink1))
   end
+
+  def test_customer_cant_afford_drink
+    assert_equal("Customer can't afford drink", @customer2.buy_drink(@pub, @drink1))
+  end
+
+  def test_remove_money_from_wallet
+    assert_equal(15.50, @customer.remove_money(@drink1))
+  end
+  # def test_wallet_money_reduced
+  #   assert_equal(15.50, @customer.buy_drink(@pub, @drink1))
+  # end
+
 
 end

@@ -17,12 +17,21 @@ class Customer
   #   end
   # end
 
-  def buy_drink(drink)
+  def remove_money(drink)
+    result = wallet - drink.price
+    return result
+  end
+
+  def buy_drink(pub, drink)
     if wallet >= drink.price
-      return true
+      pub.till += drink.price
+      remove_money(drink)
+      return pub.till
     else
-      return false
+      return "Customer can't afford drink"
     end
   end
+
+
 
 end
