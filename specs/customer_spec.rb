@@ -9,13 +9,13 @@ class TestCustomer < MiniTest::Test
 
   def setup
 
-    @food1 = Food.new("Crisps", 0.50, 10)
-    @food2 = Food.new("Peanuts", 5.00, 20)
-    @food3 = Food.new("Pork Scratchings", 2.00, 30)
+    @food1 = Food.new("Crisps", 0.50, 10, 5)
+    @food2 = Food.new("Peanuts", 5.00, 20, 5)
+    @food3 = Food.new("Pork Scratchings", 2.00, 30, 5)
 
-    @drink1 = Drink.new("Vodka", 4.50, 40)
-    @drink2 = Drink.new("Beer", 5.00, 5)
-    @drink3 = Drink.new("Wine", 8.50, 25)
+    @drink1 = Drink.new("Vodka", 4.50, 40, 5)
+    @drink2 = Drink.new("Beer", 5.00, 5, 5)
+    @drink3 = Drink.new("Wine", 8.50, 25, 0)
 
     @pub = Pub.new("The King's Head", 0.0, [@drink1, @drink2, @drink3], [@food1, @food2, @food3])
 
@@ -76,5 +76,15 @@ class TestCustomer < MiniTest::Test
   def test_buy_food_fail
     @customer3.buy_food(@food2)
     assert_equal("Customer can't afford food", @customer3.buy_food(@food2))
+  end
+
+  def test_check_stock_out_of_stock
+    @customer.check_stock(@drink3)
+    assert_equal("Out of stock", @customer.check_stock(@drink3))
+  end
+
+  def test_check_stock_success
+    @customer.check_stock(@drink2)
+    assert_equal(4, @drink2.stock)
   end
 end
