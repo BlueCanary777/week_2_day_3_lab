@@ -35,7 +35,6 @@ class Customer
     end
   end
 
-
   def remove_money(drink)
     if @wallet >= drink.price
       @wallet -= drink.price
@@ -52,12 +51,23 @@ class Customer
       remove_money(drink)
       @drunkeness += drink.alcohol_level
       return pub.till
-    else
+        elsif check_age(drink) == false
+      return "Customer is too young"
+        elsif check_drunkeness(drink) == false
+      return "Customer is too drunk"
+        else
       return "Customer can't afford drink"
     end
 
   end
 
-
+  def buy_food(food)
+    if check_money(food) == true
+      remove_money(food)
+      @drunkeness -= food.rejuv_level
+    else
+      return "Customer can't afford food"
+    end
+  end
 
 end

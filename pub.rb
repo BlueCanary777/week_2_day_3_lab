@@ -1,11 +1,12 @@
 class Pub
-  attr_accessor :name, :till, :drinks
+  attr_accessor :name, :till, :drinks, :food
 
-  def initialize(name, till, drinks)
+  def initialize(name, till, drinks, food)
 
     @name = name
     @till = till
     @drinks = drinks || []
+    @food = food || []
 
   end
 
