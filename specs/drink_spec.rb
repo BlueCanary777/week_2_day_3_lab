@@ -6,7 +6,7 @@ class TestDrink < MiniTest::Test
 
   def setup
 
-    @drink = Drink.new("Beer", 5.00)
+    @drink = Drink.new("Beer", 5.00, 5)
 
   end
 

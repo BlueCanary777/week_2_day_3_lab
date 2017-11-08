@@ -6,9 +6,9 @@ require_relative('../drink.rb')
 class TestPub < MiniTest::Test
 
   def setup
-    @drink1 = Drink.new("Vodka", 4.50)
-    @drink2 = Drink.new("Beer", 5.00)
-    @drink3 = Drink.new("Wine", 8.50)
+    @drink1 = Drink.new("Vodka", 4.50, 40)
+    @drink2 = Drink.new("Beer", 5.00, 5)
+    @drink3 = Drink.new("Wine", 8.50, 25)
     @pub = Pub.new("The King's Head", 0.0, [@drink1, @drink2, @drink3])
 
   end
