@@ -10,7 +10,7 @@ class TestCustomer < MiniTest::Test
   def setup
 
     @food1 = Food.new("Crisps", 0.50, 10)
-    @food2 = Food.new("Peanuts", 2.00, 20)
+    @food2 = Food.new("Peanuts", 5.00, 20)
     @food3 = Food.new("Pork Scratchings", 2.00, 30)
 
     @drink1 = Drink.new("Vodka", 4.50, 40)
@@ -56,10 +56,6 @@ class TestCustomer < MiniTest::Test
     assert_equal(false, @customer2.check_age(@drink1))
   end
 
-  def test_customer_too_drunk
-    assert_equal(false, @customer3.check_age(@drink1))
-  end
-
   def test_customer_has_enough_money
     assert_equal(true, @customer.check_money(@drink1))
   end
@@ -72,8 +68,13 @@ class TestCustomer < MiniTest::Test
     assert_equal(true, @customer.check_drunkeness(@drink1))
   end
 
-  def test_buy_food
+  def test_buy_food_success
     @customer3.buy_food(@food3)
     assert_equal(30, @customer3.drunkeness)
+  end
+
+  def test_buy_food_fail
+    @customer3.buy_food(@food2)
+    assert_equal("Customer can't afford food", @customer3.buy_food(@food2))
   end
 end
